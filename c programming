@@ -412,5 +412,314 @@ int power(int base, int a) {
     else
         return 1;
 }
+calculate average using arrays
+#include <stdio.h>
+int main() {
+    int n, i;
+    float num[100], sum = 0.0, avg;
+
+    printf("Enter the numbers of elements: ");
+    scanf("%d", &n);
+
+    while (n > 100 || n < 1) {
+        printf("Error! number should in range of (1 to 100).\n");
+        printf("Enter the number again: ");
+        scanf("%d", &n);
+    }
+
+    for (i = 0; i < n; ++i) {
+        printf("%d. Enter number: ", i + 1);
+        scanf("%f", &num[i]);
+        sum += num[i];
+    }
+
+    avg = sum / n;
+    printf("Average = %.2f", avg);
+    return 0;
+}
+Find largest element in an array
+#include <stdio.h>
+int main() {
+  int n;
+  double arr[100];
+  printf("Enter the number of elements (1 to 100): ");
+  scanf("%d", &n);
+
+  for (int i = 0; i < n; ++i) {
+    printf("Enter number%d: ", i + 1);
+    scanf("%lf", &arr[i]);
+  }
+
+  // storing the largest number to arr[0]
+  for (int i = 1; i < n; ++i) {
+    if (arr[0] < arr[i]) {
+      arr[0] = arr[i];
+    }
+  }
+
+  printf("Largest element = %.2lf", arr[0]);
+
+  return 0;
+}
+calculate standard deviation
+// SD of a population
+#include <math.h>
+#include <stdio.h>
+float calculateSD(float data[]);
+int main() {
+    int i;
+    float data[10];
+    printf("Enter 10 elements: ");
+    for (i = 0; i < 10; ++i)
+        scanf("%f", &data[i]);
+    printf("\nStandard Deviation = %.6f", calculateSD(data));
+    return 0;
+}
+
+float calculateSD(float data[]) {
+    float sum = 0.0, mean, SD = 0.0;
+    int i;
+    for (i = 0; i < 10; ++i) {
+        sum += data[i];
+    }
+    mean = sum / 10;
+    for (i = 0; i < 10; ++i) {
+        SD += pow(data[i] - mean, 2);
+    }
+    return sqrt(SD / 10);
+}
+Find transverse of matrix
+#include <stdio.h>
+int main() {
+  int a[10][10], transpose[10][10], r, c;
+  printf("Enter rows and columns: ");
+  scanf("%d %d", &r, &c);
+
+  // asssigning elements to the matrix
+  printf("\nEnter matrix elements:\n");
+  for (int i = 0; i < r; ++i)
+  for (int j = 0; j < c; ++j) {
+    printf("Enter element a%d%d: ", i + 1, j + 1);
+    scanf("%d", &a[i][j]);
+  }
+
+  // printing the matrix a[][]
+  printf("\nEntered matrix: \n");
+  for (int i = 0; i < r; ++i)
+  for (int j = 0; j < c; ++j) {
+    printf("%d  ", a[i][j]);
+    if (j == c - 1)
+    printf("\n");
+  }
+
+  // computing the transpose
+  for (int i = 0; i < r; ++i)
+  for (int j = 0; j < c; ++j) {
+    transpose[j][i] = a[i][j];
+  }
+
+  // printing the transpose
+  printf("\nTranspose of the matrix:\n");
+  for (int i = 0; i < c; ++i)
+  for (int j = 0; j < r; ++j) {
+    printf("%d  ", transpose[i][j]);
+    if (j == r - 1)
+    printf("\n");
+  }
+  return 0;
+}
+Find the length of a string
+#include <stdio.h>
+int main() {
+    char s[] = "Programming is fun";
+    int i;
+
+    for (i = 0; s[i] != '\0'; ++i);
+    
+    printf("Length of the string: %d", i);
+    return 0;
+}
+C Program to Copy String Without Using strcpy()
+#include <stdio.h>
+int main() {
+    char s1[100], s2[100], i;
+    printf("Enter string s1: ");
+    fgets(s1, sizeof(s1), stdin);
+
+    for (i = 0; s1[i] != '\0'; ++i) {
+        s2[i] = s1[i];
+    }
+
+    s2[i] = '\0';
+    printf("String s2: %s", s2);
+    return 0;
+}
+Calculate Difference Between Two Time Periods
+#include <stdio.h>
+struct TIME {
+   int seconds;
+   int minutes;
+   int hours;
+};
+
+void differenceBetweenTimePeriod(struct TIME t1,
+                                 struct TIME t2,
+                                 struct TIME *diff);
+
+int main() {
+   struct TIME startTime, stopTime, diff;
+
+   printf("Enter the start time. \n");
+   printf("Enter hours, minutes and seconds: ");
+   scanf("%d %d %d", &startTime.hours,
+         &startTime.minutes,
+         &startTime.seconds);
+
+   printf("Enter the stop time. \n");
+   printf("Enter hours, minutes and seconds: ");
+   scanf("%d %d %d", &stopTime.hours,
+         &stopTime.minutes,
+         &stopTime.seconds);
+
+   // Difference between start and stop time
+   differenceBetweenTimePeriod(startTime, stopTime, &diff);
+   printf("\nTime Difference: %d:%d:%d - ", startTime.hours,
+          startTime.minutes,
+          startTime.seconds);
+   printf("%d:%d:%d ", stopTime.hours,
+          stopTime.minutes,
+          stopTime.seconds);
+   printf("= %d:%d:%d\n", diff.hours,
+          diff.minutes,
+          diff.seconds);
+   return 0;
+}
+
+// Computes difference between time periods
+void differenceBetweenTimePeriod(struct TIME start,
+                                 struct TIME stop,
+                                 struct TIME *diff) {
+   while (start.seconds > stop.seconds) {
+      --stop.minutes;
+      stop.seconds += 60;
+   }
+   diff->seconds = stop.seconds - start.seconds;
+   while (start.minutes > stop.minutes) {
+      --stop.hours;
+      stop.minutes += 60;
+   }
+   diff->minutes = stop.minutes - start.minutes;
+   diff->hours = stop.hours - start.hours;
+
+   if(diff->hours < 0){
+      diff->hours += 24; 
+   }
+}
+Write a Sentence to a File
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    char sentence[1000];
+
+    // creating file pointer to work with files
+    FILE *fptr;
+
+    // opening file in writing mode
+    fptr = fopen("program.txt", "w");
+
+    // exiting program 
+    if (fptr == NULL) {
+        printf("Error!");
+        exit(1);
+    }
+    printf("Enter a sentence:\n");
+    fgets(sentence, sizeof(sentence), stdin);
+    fprintf(fptr, "%s", sentence);
+    fclose(fptr);
+    return 0;
+}
+Read the First Line From a File
+#include <stdio.h>
+#include <stdlib.h> // For exit() function
+int main() {
+    char c[1000];
+    FILE *fptr;
+    if ((fptr = fopen("program.txt", "r")) == NULL) {
+        printf("Error! File cannot be opened.");
+        // Program exits if the file pointer returns NULL.
+        exit(1);
+    }
+
+    // reads text until newline is encountered
+    fscanf(fptr, "%[^\n]", c);
+    printf("Data from the file:\n%s", c);
+    fclose(fptr);
+
+    return 0;
+}
+ Display its own Source Code as Output
+#include <stdio.h>
+int main() {
+    FILE *fp;
+    int c;
+   
+    // open the current input file
+    fp = fopen(__FILE__,"r");
+
+    do {
+         c = getc(fp);   // read character 
+         putchar(c);     // display character
+    }
+    while(c != EOF);  // loop until the end of file is reached
+    
+    fclose(fp);
+    return 0;
+}
+Print Pyramids and Patterns
+#include <stdio.h>
+int main() {
+   int i, j, rows;
+   printf("Enter the number of rows: ");
+   scanf("%d", &rows);
+   for (i = 1; i <= rows; ++i) {
+      for (j = 1; j <= i; ++j) {
+         printf("* ");
+      }
+      printf("\n");
+   }
+   return 0;
+}
+Store Data in Structures Dynamically
+#include <stdio.h>
+#include <stdlib.h>
+struct course {
+  int marks;
+  char subject[30];
+};
+
+int main() {
+  struct course *ptr;
+  int noOfRecords;
+  printf("Enter the number of records: ");
+  scanf("%d", &noOfRecords);
+
+  // Memory allocation for noOfRecords structures
+  ptr = (struct course *)malloc(noOfRecords * sizeof(struct course));
+  for (int i = 0; i < noOfRecords; ++i) {
+    printf("Enter subject and marks:\n");
+    scanf("%s %d", (ptr + i)->subject, &(ptr + i)->marks);
+  }
+
+  printf("Displaying Information:\n");
+  for (int i = 0; i < noOfRecords; ++i) {
+    printf("%s\t%d\n", (ptr + i)->subject, (ptr + i)->marks);
+  }
+
+  free(ptr);
+
+  return 0;
+}
+
 
 
